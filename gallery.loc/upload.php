@@ -7,8 +7,7 @@ if($login !== null && !empty($_FILES['attachment'])) {
 
     if (!empty($_FILES['attachment'])) {
         $file = $_FILES['attachment'];
-        // собираем путь до нового файла - папка uploads в текущей директории
-        // в качестве имени оставляем исходное файла имя во время загрузки в браузере
+        
         $srcFileName = $file['name'];
         $newFilePath = __DIR__ . '/uploads/' . $srcFileName;
         $sizeX = 1280;
@@ -23,11 +22,11 @@ if($login !== null && !empty($_FILES['attachment'])) {
             $error = 'Высота изображения не должна превышать 720px.';
         } elseif ($imageSize[0] > $sizeX) {
             $error = 'Ширина изображения не должна превышать 1280px.';
-            // Установите значение upload_max_filesize в файле php.ini, равное 2M
+            // Значение upload_max_filesize в файле php.ini, равное 2M
         } elseif ($file['error'] == UPLOAD_ERR_INI_SIZE) {
             $error = 'Загружаемый файл не может превышать 2 МБ';
 
-            // Позвольте загружать только файлы размером меньше 8Мб.
+            // Загрузка файлов меньше 8Мб.
         } elseif ($file['size'] > 8388608) {
             $error = 'Загружаемый файл не может превышать 8МБ.';
         } elseif (!in_array($extension, $allowedExtensions)) {
